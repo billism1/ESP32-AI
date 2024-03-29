@@ -5,7 +5,7 @@
 #include <ArduinoJson.h>
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
-#include <HTTPClient.h>
+#include <libraries/HTTPClient/src/HTTPClient.h>
 #include <mbedtls/base64.h>
 #include <driver/i2s.h>
 #include <Wire.h>
