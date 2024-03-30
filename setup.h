@@ -53,10 +53,10 @@ bool i2s_mic_install() {
   esp_err_t i2s_install_status = i2s_driver_install(I2S_NUM_0, &i2s_config, 0, NULL);
 
   const i2s_pin_config_t pin_config = {
-    .bck_io_num = I2S_SCK,
-    .ws_io_num = I2S_WS,
+    .bck_io_num = I2S_MIC_SCK,
+    .ws_io_num = I2S_MIC_WS,
     .data_out_num = -1,
-    .data_in_num = I2S_SD
+    .data_in_num = I2S_MIC_SD
   };
   esp_err_t i2s_pin_status = i2s_set_pin(I2S_NUM_0, &pin_config);
   i2s_start(I2S_NUM_0); //moved here, it was outside before
@@ -83,10 +83,12 @@ bool i2s_speaker_install() {
   };
   esp_err_t i2s_install_status = i2s_driver_install(I2S_NUM_0, &i2s_config, 0, NULL);
 
+  // pin reference: https://dronebotworkshop.com/esp32-i2s/
+
   i2s_pin_config_t pin_config = {
-      .bck_io_num = 11,//bclkPin,
-      .ws_io_num = 12,//wclkPin,
-      .data_out_num = 10,//dataPin,
+      .bck_io_num = I2S_SPEAKER_BCLK,     // BCLK pin
+      .ws_io_num = I2S_SPEAKER_LRC,       // LRC pin
+      .data_out_num = I2S_SPEAKER_DIN,    // DIN   pin
       .data_in_num = I2S_PIN_NO_CHANGE};
   esp_err_t i2s_pin_status = i2s_set_pin(I2S_NUM_0, &pin_config);
   i2s_set_sample_rates(I2S_NUM_0, SAMPLE_RATE);
